@@ -3,14 +3,16 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^1.0.4",
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
     "@nomiclabs/hardhat-ethers": "^2.2.1",
     "@openzeppelin/hardhat-upgrades": "^1.21.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "latest",
     "ethers": "^5.7.2",
     "hardhat": "^2.12.2",
-    "typescript": "latest",
-    "@types/node": "latest",
-    "ts-node": "latest"
+    "ts-node": "latest",
+    "typescript": "latest"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3"

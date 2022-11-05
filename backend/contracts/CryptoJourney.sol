@@ -6,8 +6,6 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-// This is a test.
-
 /// @custom:security-contact contact@cryptojourney.com
 contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
     // Enum representing the direction of the bet.
