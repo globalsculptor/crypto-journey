@@ -22,7 +22,7 @@ public class Baldie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        stopAnimation();
     }
 
     // Update is called once per frame
@@ -31,42 +31,60 @@ public class Baldie : MonoBehaviour
         if (Input.GetKeyDown(moveUp))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, speed, 0);
+            startAnimation();
         }
 
         if (Input.GetKeyDown(moveDown))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, -speed, 0);
+            startAnimation();
         }
 
         if (Input.GetKeyDown(moveLeft))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(-speed, 0, 0);
+            startAnimation();
         }
 
         if (Input.GetKeyDown(moveRight))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(speed, 0, 0);
+            startAnimation();
         }
 
         if (Input.GetKeyUp(moveUp))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            stopAnimation();
         }
 
         if (Input.GetKeyUp(moveDown))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            stopAnimation();
         }
 
         if (Input.GetKeyUp(moveLeft))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            stopAnimation();
         }
 
         if (Input.GetKeyUp(moveRight))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+            stopAnimation();
         }
+    }
+
+    void startAnimation()
+    {
+        GetComponent<Animator>().enabled = true;
+    }
+
+    void stopAnimation()
+    {
+        GetComponent<Animator>().enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
