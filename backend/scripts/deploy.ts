@@ -1,11 +1,18 @@
 import { ethers } from "hardhat";
 
 async function main() {
+  // Get the ABI json structure and build a factory.
+  const CryptoJourneyABI = await ethers.getContractFactory("CryptoJourney");
 
-  const ERC20 = await ethers.getContractFactory("ERC20");
-  const TokenContract = await ERC20.deploy("CryptoJourney", "JRNY");
+  // Deploy the contract
+  const CryptoJourneyContract = await CryptoJourneyABI.deploy(
+    "CryptoJourney",
+    "JRNY",
+    1_000_000
+  );
 
-  await TokenContract.deployed();
+  // 🚀
+  await CryptoJourneyContract.deployed();
   console.log(`Contract has been deployed successfully`);
 }
 

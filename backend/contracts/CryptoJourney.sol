@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @custom:security-contact contact@cryptojourney.com
-contract CrytproJourney is ERC20, ERC20Burnable, Pausable, Ownable {
+contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
     // Enum representing the direction of the bet.
     enum BetDirection {
         DOWN,
@@ -36,9 +36,10 @@ contract CrytproJourney is ERC20, ERC20Burnable, Pausable, Ownable {
 
     constructor(
         string memory name,
-        string memory symbol
+        string memory symbol,
+        uint intialSupply
     ) ERC20(name, symbol) {
-        _mint(msg.sender, 1000 * 10**decimals());
+        _mint(msg.sender, intialSupply * 10**decimals());
     }
 
     // Check if the user has a bet in place.
