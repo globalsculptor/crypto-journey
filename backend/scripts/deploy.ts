@@ -4,9 +4,9 @@ async function main() {
   const initial_amount = 1_000_000;
 
   const ERC20 = await ethers.getContractFactory("ERC20");
-  const lock = await ERC20.deploy("CryptoJourney", "JRNY", initial_amount);
+  const TokenContract = await ERC20.deploy("CryptoJourney", "JRNY");
 
-  await lock.deployed();
+  await TokenContract.deployed();
   console.log(
     `Contract has been deployed successfully with ${initial_amount} initial tokens`
   );

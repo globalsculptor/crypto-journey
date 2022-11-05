@@ -36,10 +36,9 @@ contract CrytproJourney is ERC20, ERC20Burnable, Pausable, Ownable {
 
     constructor(
         string memory name,
-        string memory symbol,
-        uint256 initial_amount
+        string memory symbol
     ) ERC20(name, symbol) {
-        _mint(msg.sender, initial_amount * 10**decimals());
+        _mint(msg.sender, 1000 * 10**decimals());
     }
 
     // Check if the user has a bet in place.
