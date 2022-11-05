@@ -13,6 +13,7 @@ public class Baldie : MonoBehaviour
 
     public GameObject outside;
     public GameObject rug;
+    public GameObject home;
 
 
     // Start is called before the first frame update
@@ -50,7 +51,10 @@ public class Baldie : MonoBehaviour
         if (collision.gameObject == rug)
         {
             outside.SetActive(true);
+            Debug.Log("Back to Outside");
         }
+
+        
         
     }
 }

@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 193476238}
   - component: {fileID: 193476237}
   m_Layer: 5
-  m_Name: House1
+  m_Name: House2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -680,8 +680,9 @@ GameObject:
   - component: {fileID: 317758565}
   - component: {fileID: 317758564}
   - component: {fileID: 317758563}
+  - component: {fileID: 317758567}
   m_Layer: 5
-  m_Name: House2
+  m_Name: House
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -731,7 +732,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 260, y: 125}
+  m_Size: {x: 200, y: 200}
   m_EdgeRadius: 0
 --- !u!50 &317758564
 Rigidbody2D:
@@ -792,6 +793,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317758561}
   m_CullTransparentMesh: 1
+--- !u!114 &317758567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317758561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9cdef1b200a34a2994cb18bce332973, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outside: {fileID: 1051427478}
 --- !u!1 &400107267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,7 +1831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1051427479
 Transform:
   m_ObjectHideFlags: 0
@@ -2147,6 +2161,7 @@ MonoBehaviour:
   speed: 120
   outside: {fileID: 1051427478}
   rug: {fileID: 235446927}
+  home: {fileID: 0}
 --- !u!50 &1110294490
 Rigidbody2D:
   serializedVersion: 4
@@ -2547,7 +2562,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -138.85107, y: -244.59589}
+  m_AnchoredPosition: {x: -138.85107, y: -297}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!50 &1969688232
@@ -2588,8 +2603,9 @@ MonoBehaviour:
   moveLeft: 276
   moveRight: 275
   speed: 120
-  outside: {fileID: 0}
-  rug: {fileID: 0}
+  outside: {fileID: 1051427478}
+  rug: {fileID: 235446927}
+  home: {fileID: 317758561}
 --- !u!114 &1969688234
 MonoBehaviour:
   m_ObjectHideFlags: 0
