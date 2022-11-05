@@ -44,6 +44,26 @@ public class Baldie : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(speed, 0, 0);
         }
+
+        if (Input.GetKeyUp(moveUp))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        }
+
+        if (Input.GetKeyUp(moveDown))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        }
+
+        if (Input.GetKeyUp(moveLeft))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        }
+
+        if (Input.GetKeyUp(moveRight))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
