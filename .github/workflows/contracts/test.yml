@@ -13,8 +13,11 @@ jobs:
         with:
           node-version: '18.x'
       - run: yarn --ignore-scripts
+        working-directory: ./backend
         shell: bash
       - name: Compile
+        working-directory: ./backend
         run: yarn hardhat test
       - name: Unit Tests
+        working-directory: ./backend
         run: yarn hardhat test
