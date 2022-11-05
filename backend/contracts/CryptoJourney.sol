@@ -42,40 +42,38 @@ contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
         _mint(msg.sender, intialSupply * 10**decimals());
     }
 
-    // Check if the user has a bet in place.
-    modifier hasBet(bool inverse) {
-        if (inverse) {
-            require(
-                _activeBet[msg.sender] == false,
-                "User already has a bet in place."
-            );
-        } else {
-            require(
-                _activeBet[msg.sender] == true,
-                "User does not have a bet in place."
-            );
-        }
-        _;
+    // TODO: Get random direction from oracle.
+
+    // Search for a bet in the contract.
+    function hasBet(address account) public view returns(bool) {
+        return _activeBet[account];
     }
 
-    // TODO() Get current price from oracle.
+    // Search for a bet in the contract.
+    function getBet(address account) public view returns(Bet memory) {
+        return _bets[account];
+    }
 
     // Put in place a bet on the direction where the price of an asset will go.
     function putBet(
         uint current_amount,
         uint bet_amount,
         BetDirection direction
-    ) public hasBet(false) {
+    ) public {
+        // Check that the address can only place bet one at a time.
+        require(_activeBet[msg.sender] != true, "Address already has a bet in place.");
         // Check if the user has enough token to place the bet.
-        require(balanceOf(msg.sender) >= bet_amount);
+        require(balanceOf(msg.sender) >= bet_amount, "Address does not have enough funds to place bet.");
 
         _activeBet[msg.sender] = true;
         _bets[msg.sender] = Bet(current_amount, bet_amount, direction);
     }
 
     // Claim the prize of a bet.
-    // TODO() Instead of passing thr current amount get it from the oracle.
-    function claimBet(uint current_amount) public hasBet(true) {
+    function claimBet(uint current_amount) public {
+        // Require that the addresses can only claim if they have a bet in place.
+        require(_activeBet[msg.sender] == true, "Address does not have a bet in place.");
+
         Bet memory _bet = _bets[msg.sender];
 
         // Delete bet from contract.
