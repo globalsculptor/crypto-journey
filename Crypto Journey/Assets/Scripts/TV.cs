@@ -9,6 +9,7 @@ public class TV : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         dialog.SetActive(true);
+        Time.timeScale = 0;
     }
 
     // Start is called before the first frame update

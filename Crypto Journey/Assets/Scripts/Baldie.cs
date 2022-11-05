@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Baldie : MonoBehaviour
 {
@@ -11,9 +12,11 @@ public class Baldie : MonoBehaviour
 
     public float speed = 120;
 
-    public GameObject outside;
     public GameObject rug;
-    public GameObject home;
+    public GameObject bed;
+    public GameObject sleep;
+
+    public GameObject house;
 
 
     // Start is called before the first frame update
@@ -44,17 +47,51 @@ public class Baldie : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(speed, 0, 0);
         }
+
+        if (Input.GetKeyUp(moveUp))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        }
+
+        if (Input.GetKeyUp(moveDown))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        }
+
+        if (Input.GetKeyUp(moveLeft))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        }
+
+        if (Input.GetKeyUp(moveRight))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0, 0);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject == rug)
+        Debug.Log("Back to Inside");
+        if (collision.gameObject == house)
         {
-            outside.SetActive(true);
-            Debug.Log("Back to Outside");
+            Debug.Log("Back to Inside");
+            SceneManager.LoadScene("CryptoJourney");
         }
 
-        
-        
+        if (collision.gameObject == rug)
+        {
+            Debug.Log("Back to Outside");
+            SceneManager.LoadScene("CryptoJourneyOutside");
+        }
+
+        if (collision.gameObject == bed)
+        {
+            Debug.Log("Sleeping time!");
+            sleep.SetActive(true);
+            gameObject.SetActive(false);
+        }
+
+
+
     }
 }
