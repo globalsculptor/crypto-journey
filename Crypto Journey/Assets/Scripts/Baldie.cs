@@ -9,6 +9,8 @@ public class Baldie : MonoBehaviour
     public KeyCode moveLeft;
     public KeyCode moveRight;
 
+    public float speed = 120;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,22 +22,22 @@ public class Baldie : MonoBehaviour
     {
         if (Input.GetKeyDown(moveUp))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 60, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, speed, 0);
         }
 
         if (Input.GetKeyDown(moveDown))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, -60, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector3(0, -speed, 0);
         }
 
         if (Input.GetKeyDown(moveLeft))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector3(-60, 0, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector3(-speed, 0, 0);
         }
 
         if (Input.GetKeyDown(moveRight))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector3(60, 0, 0);
+            GetComponent<Rigidbody2D>().velocity = new Vector3(speed, 0, 0);
         }
     }
 }
