@@ -1,6 +1,6 @@
 name: Smart Contracts CI
 on:
- workflow_dispatch:
+  workflow_dispatch
 
 jobs:
   tests:
