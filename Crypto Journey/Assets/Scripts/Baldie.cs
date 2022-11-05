@@ -11,6 +11,8 @@ public class Baldie : MonoBehaviour
 
     public float speed = 120;
 
+    public GameObject outside;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,5 +41,10 @@ public class Baldie : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(speed, 0, 0);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        outside.SetActive(true);
     }
 }
