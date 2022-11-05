@@ -1,6 +1,8 @@
 name: Smart Contracts CI
 on:
-  workflow_dispatch
+  workflow_dispatch:
+  push:
+  pull_request:
 
 jobs:
   tests:
@@ -14,7 +16,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-      - run: yarn --ignore-scripts
+      - run: yarn
         shell: bash
       - name: Compile
         run: yarn hardhat test
