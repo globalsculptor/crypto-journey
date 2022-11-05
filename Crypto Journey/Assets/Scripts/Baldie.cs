@@ -12,6 +12,8 @@ public class Baldie : MonoBehaviour
     public float speed = 120;
 
     public GameObject outside;
+    public GameObject rug;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +47,10 @@ public class Baldie : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        outside.SetActive(true);
+        if (collision.gameObject == rug)
+        {
+            outside.SetActive(true);
+        }
+        
     }
 }
