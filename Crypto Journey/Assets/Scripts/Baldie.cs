@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Baldie : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class Baldie : MonoBehaviour
 
     public float speed = 120;
 
-    public GameObject outside;
     public GameObject rug;
-    public GameObject home;
+
+    public GameObject house;
 
 
     // Start is called before the first frame update
@@ -68,10 +69,17 @@ public class Baldie : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Back to Inside");
+        if (collision.gameObject == house)
+        {
+            Debug.Log("Back to Inside");
+            SceneManager.LoadScene("CryptoJourney");
+        }
+
         if (collision.gameObject == rug)
         {
-            outside.SetActive(true);
             Debug.Log("Back to Outside");
+            SceneManager.LoadScene("CryptoJourneyOutside");
         }
 
         

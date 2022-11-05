@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class House : MonoBehaviour
 {
-    public GameObject outside;
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        outside.SetActive(false);
-        Debug.Log("Back to House");
-    }
-
     // Start is called before the first frame update
     void Start()
     {
