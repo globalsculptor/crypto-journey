@@ -18,6 +18,8 @@ jobs:
           node-version: '18.x'
       - run: yarn
         shell: bash
+      - name: Install typescript
+        run: yarn add typescript --dev
       - name: Compile
         run: yarn hardhat test
       - name: Unit Tests
