@@ -1,6 +1,8 @@
 name: Smart Contracts CI
 on:
-  [push, pull_request, workflow_dispatch]
+ workflow_dispatch:
+ push:
+ pull_request:
 
 jobs:
   tests:
