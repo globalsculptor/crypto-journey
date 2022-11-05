@@ -19,5 +19,6 @@ public class Dialog : MonoBehaviour
     public void closedClicked()
     {
         gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 }
