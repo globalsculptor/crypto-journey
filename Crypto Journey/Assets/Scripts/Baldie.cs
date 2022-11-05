@@ -13,6 +13,8 @@ public class Baldie : MonoBehaviour
     public float speed = 120;
 
     public GameObject rug;
+    public GameObject bed;
+    public GameObject sleep;
 
     public GameObject house;
 
@@ -82,7 +84,14 @@ public class Baldie : MonoBehaviour
             SceneManager.LoadScene("CryptoJourneyOutside");
         }
 
-        
-        
+        if (collision.gameObject == bed)
+        {
+            Debug.Log("Sleeping time!");
+            sleep.SetActive(true);
+            gameObject.SetActive(false);
+        }
+
+
+
     }
 }
