@@ -9,6 +9,7 @@
     "@openzeppelin/hardhat-upgrades": "^1.21.0",
     "@types/mocha": "^9.1.1",
     "@types/node": "latest",
+    "chai": "^4.3.6",
     "ethers": "^5.7.2",
     "hardhat": "^2.12.2",
     "ts-node": "latest",
