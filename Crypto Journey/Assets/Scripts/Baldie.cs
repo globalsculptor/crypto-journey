@@ -17,10 +17,12 @@ public class Baldie : MonoBehaviour
     public GameObject sleep;
 
     public GameObject house;
+    public GameObject house2;
 
     public RuntimeAnimatorController leftAnimation;
     public RuntimeAnimatorController rightAnimation;
     public RuntimeAnimatorController normalAnimation;
+    public RuntimeAnimatorController upAnimation;
 
 
     // Start is called before the first frame update
@@ -34,7 +36,7 @@ public class Baldie : MonoBehaviour
     {
         if (Input.GetKeyDown(moveUp))
         {
-            GetComponent<Animator>().runtimeAnimatorController = normalAnimation;
+            GetComponent<Animator>().runtimeAnimatorController = upAnimation;
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, speed, 0);
             startAnimation();
         }
@@ -97,16 +99,18 @@ public class Baldie : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Back to Inside");
         if (collision.gameObject == house)
         {
-            Debug.Log("Back to Inside");
             SceneManager.LoadScene("CryptoJourney");
+        }
+
+        if (collision.gameObject == house2)
+        {
+            SceneManager.LoadScene("CryptoJourneyRoom");
         }
 
         if (collision.gameObject == rug)
         {
-            Debug.Log("Back to Outside");
             SceneManager.LoadScene("CryptoJourneyOutside");
         }
 

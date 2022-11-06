@@ -371,7 +371,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 322, y: -115}
+  m_AnchoredPosition: {x: 108, y: -115}
   m_SizeDelta: {x: 244.2323, y: 243.0929}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &193476237
@@ -398,7 +398,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 260, y: 125}
+  m_Size: {x: 200, y: 200}
   m_EdgeRadius: 0
 --- !u!50 &193476238
 Rigidbody2D:
@@ -565,7 +565,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -143.96265, y: -115}
+  m_AnchoredPosition: {x: -357.96265, y: -115}
   m_SizeDelta: {x: 244.2323, y: 243.0929}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &317758563
@@ -1036,9 +1036,11 @@ MonoBehaviour:
   bed: {fileID: 0}
   sleep: {fileID: 0}
   house: {fileID: 317758561}
+  house2: {fileID: 193476235}
   leftAnimation: {fileID: 9100000, guid: 1c58c829c99c54f98a35dfc59ec05879, type: 2}
   rightAnimation: {fileID: 9100000, guid: 59df7d636672f4b4fbee47c1e2cf6a8f, type: 2}
   normalAnimation: {fileID: 9100000, guid: 3a587c2f6f3394b88b567a73192f0e87, type: 2}
+  upAnimation: {fileID: 9100000, guid: 2fc6ae3b967cd41d590ae44c97ab609a, type: 2}
 --- !u!114 &1969688234
 MonoBehaviour:
   m_ObjectHideFlags: 0
