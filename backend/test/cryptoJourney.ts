@@ -16,7 +16,12 @@ describe("Crypto Journey", function () {
     const [owner, otherAccount] = await ethers.getSigners();
 
     const Factory = await ethers.getContractFactory("CryptoJourney");
-    const contract = await Factory.deploy(name, symbol, initialSupply);
+    const contract = await Factory.deploy(
+      name,
+      symbol,
+      initialSupply,
+      "0xca62f04Dd112aCc05305C2352A598d92FD671E66"
+    );
 
     return { contract, name, symbol, initialSupply, owner, otherAccount };
   }
@@ -105,7 +110,7 @@ describe("Crypto Journey", function () {
         const { contract, otherAccount } = await loadFixture(deploy);
 
         // Put bet with account with no balance.
-        const result = contract.connect(otherAccount).claimBet("1000001");
+        const result = contract.connect(otherAccount)._claimBet("1000001");
 
         await expect(result).to.be.revertedWith(
           "Address does not have a bet in place."
@@ -122,7 +127,7 @@ describe("Crypto Journey", function () {
           await contract.connect(otherAccount).putBet("20", "1", "1");
   
           // Claim Bet prize successfully.
-          await contract.connect(otherAccount).claimBet("21");
+          await contract.connect(otherAccount)._claimBet("21");
   
           // check other account balance.
           const otherAccountBalance = await contract.balanceOf(
@@ -141,7 +146,7 @@ describe("Crypto Journey", function () {
           await contract.connect(otherAccount).putBet("20", "1", "1");
   
           // Claim Bet prize successfully.
-          await contract.connect(otherAccount).claimBet("18");
+          await contract.connect(otherAccount)._claimBet("18");
   
           // check other account balance.
           const otherAccountBalance = await contract.balanceOf(
@@ -160,7 +165,7 @@ describe("Crypto Journey", function () {
           await contract.connect(otherAccount).putBet("20", "1", "0");
   
           // Claim Bet prize successfully.
-          await contract.connect(otherAccount).claimBet("18");
+          await contract.connect(otherAccount)._claimBet("18");
   
           // check other account balance.
           const otherAccountBalance = await contract.balanceOf(
@@ -179,7 +184,7 @@ describe("Crypto Journey", function () {
           await contract.connect(otherAccount).putBet("20", "1", "0");
   
           // Claim Bet prize successfully.
-          await contract.connect(otherAccount).claimBet("21");
+          await contract.connect(otherAccount)._claimBet("21");
   
           // check other account balance.
           const otherAccountBalance = await contract.balanceOf(
@@ -199,7 +204,7 @@ describe("Crypto Journey", function () {
         await contract.connect(otherAccount).putBet("10", "1", "1");
 
         // Claim Bet prize successfully.
-        await expect(contract.connect(otherAccount).claimBet("11"))
+        await expect(contract.connect(otherAccount)._claimBet("11"))
           .to.emit(contract, "Outcome")
           .withArgs(otherAccount.address, 1, "10", "11", "1");
       })

@@ -6,8 +6,13 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
+interface IRandomValue {
+    function randomValue() external view returns(uint);
+}
+
 /// @custom:security-contact contact@cryptojourney.com
 contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
+    address _randomNumberAddress;
     // Enum representing the direction of the bet.
     enum BetDirection {
         DOWN,
@@ -37,12 +42,17 @@ contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
     constructor(
         string memory name,
         string memory symbol,
-        uint intialSupply
+        uint intialSupply,
+        address _RandomNumberAddress
     ) ERC20(name, symbol) {
         _mint(msg.sender, intialSupply * 10**decimals());
+        _randomNumberAddress = _RandomNumberAddress;
     }
 
-    // TODO: Get random direction from oracle.
+    // Get random value between 1-100
+    function getRandomValue() public view returns (uint) {
+        return IRandomValue(_randomNumberAddress).randomValue();
+    }
 
     // Search for a bet in the contract.
     function hasBet(address account) public view returns(bool) {
@@ -69,8 +79,17 @@ contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
         _bets[msg.sender] = Bet(current_amount, bet_amount, direction);
     }
 
-    // Claim the prize of a bet.
+    function claimBet() public {
+        uint randomNumber = getRandomValue();
+        return _claimBet(randomNumber);
+    }
+
     function claimBet(uint current_amount) public {
+        return _claimBet(current_amount);
+    }
+
+    // Claim the prize of a bet.
+    function _claimBet(uint passed_amount) public {
         // Require that the addresses can only claim if they have a bet in place.
         require(_activeBet[msg.sender] == true, "Address does not have a bet in place.");
 
@@ -82,7 +101,7 @@ contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
 
         // Check if the user guess the correct movement at the time of claim.
         if (_bet.direction == BetDirection.UP) {
-            if (current_amount > _bet.base) {
+            if (passed_amount > _bet.base) {
                 // Payout to msg.sender
                 _mint(msg.sender, _bet.amount);
             } else {
@@ -92,7 +111,7 @@ contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
         }
 
         if (_bet.direction == BetDirection.DOWN) {
-            if (current_amount < _bet.base) {
+            if (passed_amount < _bet.base) {
                 // Payout to msg.sender
                 _mint(msg.sender, _bet.amount);
             } else {
@@ -106,7 +125,7 @@ contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
             msg.sender,
             _bet.direction,
             _bet.base,
-            current_amount,
+            passed_amount,
             _bet.amount
         );
     }
