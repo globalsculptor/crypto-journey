@@ -18,6 +18,7 @@ public class Baldie : MonoBehaviour
 
     public GameObject house;
     public GameObject house2;
+    public GameObject nextDay;
 
     public RuntimeAnimatorController leftAnimation;
     public RuntimeAnimatorController rightAnimation;
@@ -87,6 +88,18 @@ public class Baldie : MonoBehaviour
         }
     }
 
+    void showNextDayMessage()
+    {
+        nextDay.SetActive(true);
+        Invoke("reloadScene", 2);
+        
+    }
+
+    void reloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     void startAnimation()
     {
         GetComponent<Animator>().enabled = true;
@@ -119,6 +132,7 @@ public class Baldie : MonoBehaviour
             Debug.Log("Sleeping time!");
             sleep.SetActive(true);
             gameObject.SetActive(false);
+            Invoke("showNextDayMessage", 2);
         }
 
 
