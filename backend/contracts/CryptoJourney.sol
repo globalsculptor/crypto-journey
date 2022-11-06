@@ -7,12 +7,13 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 interface IRandomValue {
-    function randomValue() external view returns (uint);
+    function randomValue() external view returns(uint);
 }
 
 /// @custom:security-contact contact@cryptojourney.com
 contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
-    address _randomNumberAddress;
+    address public randomValueAddress;
+    IRandomValue randomValueContract;
     // Enum representing the direction of the bet.
     enum BetDirection {
         DOWN,
@@ -43,15 +44,15 @@ contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
         string memory name,
         string memory symbol,
         uint intialSupply,
-        address _RandomNumberAddress
+        address _randomValueAddress
     ) ERC20(name, symbol) {
         _mint(msg.sender, intialSupply * 10**decimals());
-        _randomNumberAddress = _RandomNumberAddress;
+        randomValueAddress = _randomValueAddress;
     }
 
     // Get random value between 1-100
     function getRandomValue() public view returns (uint) {
-        return IRandomValue(_randomNumberAddress).randomValue();
+        return IRandomValue(randomValueAddress).randomValue();
     }
 
     // Search for a bet in the contract.
