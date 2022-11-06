@@ -16,11 +16,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
-      - run: yarn
+      - name: Install dependencies
+        run: npm install
         shell: bash
-      - name: Install typescript
-        run: yarn add typescript --dev
       - name: Compile
-        run: yarn hardhat test
+        run: npx hardhat compile
       - name: Unit Tests
-        run: yarn hardhat test
+        run: npx hardhat test
