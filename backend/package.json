@@ -23,6 +23,7 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.7.3"
+    "@openzeppelin/contracts": "^4.7.3",
+    "hardhat-laika": "^0.1.1"
   }
 }

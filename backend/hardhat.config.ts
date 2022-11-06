@@ -1,6 +1,8 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@openzeppelin/hardhat-upgrades";
+import "@nomiclabs/hardhat-etherscan";
+import "hardhat-laika";
 import * as dotenv from "dotenv";
 
 // Load ENV variables.
@@ -30,17 +32,35 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
-    // customChains: [
-    //   {
-    //     network: "skale",
-    //     chainId: parseInt("0x785b4b9847b9"),
-    //     urls: {
-    //       apiURL: process.env.SKALE_API_URL as string,
-    //       browserURL: process.env.SKALE_BLOCKEXPLORER_URL as string,
-    //     },
-    //   },
-    // ],
+    apiKey: {
+      mainnet: process.env.ETHERSCAN_API_KEY as string,
+      ropsten: process.env.ETHERSCAN_API_KEY as string,
+      rinkeby: process.env.ETHERSCAN_API_KEY as string,
+      goerli: process.env.ETHERSCAN_API_KEY as string,
+      kovan: process.env.ETHERSCAN_API_KEY as string,
+      polygon: process.env.POLYGONSCAN_API_KEY as string,
+      polygonMumbai: process.env.POLYGONSCAN_API_KEY as string,
+      optimism: process.env.OPTIMISMSCAN_API_KEY as string,
+      optimismGoerli: process.env.OPTIMISMSCAN_API_KEY as string,
+    },
+    customChains: [
+      {
+        network: "optimismGoerli",
+        chainId: 420,
+        urls: {
+          apiURL: "https://api-goerli-optimism.etherscan.io/api",
+          browserURL: "https://goerli-optimism.etherscan.io",
+        },
+      },
+      // {
+      //   network: "skale",
+      //   chainId: parseInt("0x785b4b9847b9"),
+      //   urls: {
+      //     apiURL: process.env.SKALE_API_URL as string,
+      //     browserURL: process.env.SKALE_BLOCKEXPLORER_URL as string,
+      //   },
+      // },
+    ],
   },
 };
 
