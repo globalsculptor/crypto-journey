@@ -24,7 +24,7 @@ async function main() {
   // 🚀
   const result = await CryptoJourneyContract.deployed();
   console.log(`Contract has been deployed successfully`);
-  // console.log(`Contract Address: ${result.address}`);
+  console.log(`Contract Address: ${result.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
