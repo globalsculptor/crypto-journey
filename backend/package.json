@@ -18,6 +18,7 @@
     "ethers": "^5.7.2",
     "hardhat": "^2.12.2",
     "hardhat-gas-reporter": "^1.0.2",
+    "keyv": "^4.5.0",
     "ts-node": "latest",
     "typescript": "latest"
   },

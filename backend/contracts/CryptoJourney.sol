@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 interface IRandomValue {
-    function randomValue() external view returns(uint);
+    function randomValue() external view returns (uint);
 }
 
 /// @custom:security-contact contact@cryptojourney.com
@@ -55,12 +55,12 @@ contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
     }
 
     // Search for a bet in the contract.
-    function hasBet(address account) public view returns(bool) {
+    function hasBet(address account) public view returns (bool) {
         return _activeBet[account];
     }
 
     // Search for a bet in the contract.
-    function getBet(address account) public view returns(Bet memory) {
+    function getBet(address account) public view returns (Bet memory) {
         return _bets[account];
     }
 
@@ -71,27 +71,27 @@ contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
         BetDirection direction
     ) public {
         // Check that the address can only place bet one at a time.
-        require(_activeBet[msg.sender] != true, "Address already has a bet in place.");
+        require(
+            _activeBet[msg.sender] != true,
+            "Address already has a bet in place."
+        );
         // Check if the user has enough token to place the bet.
-        require(balanceOf(msg.sender) >= bet_amount, "Address does not have enough funds to place bet.");
+        require(
+            balanceOf(msg.sender) >= bet_amount,
+            "Address does not have enough funds to place bet."
+        );
 
         _activeBet[msg.sender] = true;
         _bets[msg.sender] = Bet(current_amount, bet_amount, direction);
     }
 
-    function claimBet() public {
-        uint randomNumber = getRandomValue();
-        return _claimBet(randomNumber);
-    }
-
-    function claimBet(uint current_amount) public {
-        return _claimBet(current_amount);
-    }
-
     // Claim the prize of a bet.
-    function _claimBet(uint passed_amount) public {
+    function claimBet(uint passed_amount) public {
         // Require that the addresses can only claim if they have a bet in place.
-        require(_activeBet[msg.sender] == true, "Address does not have a bet in place.");
+        require(
+            _activeBet[msg.sender] == true,
+            "Address does not have a bet in place."
+        );
 
         Bet memory _bet = _bets[msg.sender];
 
@@ -138,7 +138,11 @@ contract CryptoJourney is ERC20, ERC20Burnable, Pausable, Ownable {
         _unpause();
     }
 
-    function mint(address to, uint256 amount) public onlyOwner {
+    function mint(address to, uint256 amount) public {
+        require(
+            balanceOf(to) <= 1000,
+            "Address already has >= 1000 tokens can't mint more."
+        );
         _mint(to, amount);
     }
 
