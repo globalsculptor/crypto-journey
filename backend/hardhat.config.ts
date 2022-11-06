@@ -11,10 +11,10 @@ const config: HardhatUserConfig = {
     hardhat: {
       // See its defaults
     },
-    // skale: {
-    //   url: "https://staging-v2.skalenodes.com/v1/whispering-turais",
-    //   accounts: [process.env.SKALE_PRIVATE_KEY as string],
-    // },
+    skale: {
+      url: process.env.SKALE_API_URL,
+      accounts: [`0x${process.env.SKALE_PRIVATE_KEY}`],
+    },
     optimism: {
       url: process.env.OPTIMISM_API_URL,
       accounts: [`0x${process.env.OPTIMISM_PRIVATE_KEY}`],
@@ -32,7 +32,7 @@ const config: HardhatUserConfig = {
     //     network: "skale",
     //     chainId: parseInt("0x785b4b9847b9"),
     //     urls: {
-    //       apiURL: process.env.SKALE_CHAIN_API_URL as string,
+    //       apiURL: process.env.SKALE_API_URL as string,
     //       browserURL: process.env.SKALE_BLOCKEXPLORER_URL as string,
     //     },
     //   },
