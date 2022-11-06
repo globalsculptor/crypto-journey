@@ -1763,6 +1763,9 @@ MonoBehaviour:
   bed: {fileID: 1620030337}
   sleep: {fileID: 461592061}
   house: {fileID: 0}
+  leftAnimation: {fileID: 9100000, guid: 1c58c829c99c54f98a35dfc59ec05879, type: 2}
+  rightAnimation: {fileID: 9100000, guid: 59df7d636672f4b4fbee47c1e2cf6a8f, type: 2}
+  normalAnimation: {fileID: 9100000, guid: 3a587c2f6f3394b88b567a73192f0e87, type: 2}
 --- !u!50 &1110294490
 Rigidbody2D:
   serializedVersion: 4

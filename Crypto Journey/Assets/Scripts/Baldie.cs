@@ -18,6 +18,10 @@ public class Baldie : MonoBehaviour
 
     public GameObject house;
 
+    public RuntimeAnimatorController leftAnimation;
+    public RuntimeAnimatorController rightAnimation;
+    public RuntimeAnimatorController normalAnimation;
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,24 +34,28 @@ public class Baldie : MonoBehaviour
     {
         if (Input.GetKeyDown(moveUp))
         {
+            GetComponent<Animator>().runtimeAnimatorController = normalAnimation;
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, speed, 0);
             startAnimation();
         }
 
         if (Input.GetKeyDown(moveDown))
         {
+            GetComponent<Animator>().runtimeAnimatorController = normalAnimation;
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, -speed, 0);
             startAnimation();
         }
 
         if (Input.GetKeyDown(moveLeft))
         {
+            GetComponent<Animator>().runtimeAnimatorController = leftAnimation;
             GetComponent<Rigidbody2D>().velocity = new Vector3(-speed, 0, 0);
             startAnimation();
         }
 
         if (Input.GetKeyDown(moveRight))
         {
+            GetComponent<Animator>().runtimeAnimatorController = rightAnimation;
             GetComponent<Rigidbody2D>().velocity = new Vector3(speed, 0, 0);
             startAnimation();
         }
