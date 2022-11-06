@@ -14,7 +14,6 @@ public class Web3Button : MonoBehaviour
 
     public void OnClick()
     {
-        // get wallet address and display it on the button
         ButtonText.text = WalletAddress();
     }
 
@@ -22,7 +21,7 @@ public class Web3Button : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //
     }
 
     // Update is called once per frame
