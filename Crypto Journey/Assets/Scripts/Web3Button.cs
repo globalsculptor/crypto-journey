@@ -15,6 +15,7 @@ public class Web3Button : MonoBehaviour
     public TextMeshProUGUI ButtonText;
     // use WalletAddress function from web3.jslib
     [DllImport("__Internal")] private static extern string WalletAddress();
+    [DllImport("__Internal")] private static extern string Mint(string count);
 
     public void OnClick()
     {
@@ -40,6 +41,7 @@ public class Web3Button : MonoBehaviour
         }
 
         //ButtonText.text = walletInfo;
+        Mint("10");
     }
 
 
