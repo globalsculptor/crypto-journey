@@ -7,9 +7,13 @@ mergeInto(LibraryManager.library, {
       // get address from metamask
       returnStr = web3.currentProvider.selectedAddress
       var returnStr = web3.currentProvider.selectedAddress;
+returnStr = web3.currentProvider.chainId + ' ' + returnStr;
+
       var bufferSize = lengthBytesUTF8(returnStr) + 1;
       var buffer = _malloc(bufferSize);
       stringToUTF8(returnStr, buffer, bufferSize);
+
+
     } catch (e) {
       returnStr = ""
     }
