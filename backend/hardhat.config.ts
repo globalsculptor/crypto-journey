@@ -11,18 +11,18 @@ const config: HardhatUserConfig = {
     hardhat: {
       // See its defaults
     },
-    skale: {
-      url: process.env.SKALE_API_URL,
-      accounts: [`0x${process.env.SKALE_PRIVATE_KEY}`],
-    },
+    // skale: {
+    //   url: process.env.SKALE_API_URL,
+    //   accounts: [`0x${process.env.SKALE_PRIVATE_KEY}`],
+    // },
     optimism: {
       url: process.env.OPTIMISM_API_URL,
-      accounts: [`0x${process.env.OPTIMISM_PRIVATE_KEY}`],
+      accounts: [`0x${process.env.WALLET_PRIVATE_KEY}`],
     },
     mumbai: {
       chainId: 80001,
       url: process.env.POLYGON_API_URL,
-      accounts: [`0x${process.env.POLYGON_PRIVATE_KEY}`],
+      accounts: [`0x${process.env.WALLET_PRIVATE_KEY}`],
     },
   },
   etherscan: {
