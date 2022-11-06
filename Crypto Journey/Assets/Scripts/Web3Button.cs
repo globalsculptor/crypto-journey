@@ -16,6 +16,9 @@ public class Web3Button : MonoBehaviour
     // use WalletAddress function from web3.jslib
     [DllImport("__Internal")] private static extern string WalletAddress();
 
+    // use GetSymbol function from web3.jslib
+    [DllImport("__Internal")] private static extern string GetSymbol();
+
     public void OnClick()
     {
         polygon.SetActive(false);
@@ -40,6 +43,10 @@ public class Web3Button : MonoBehaviour
         }
 
         //ButtonText.text = walletInfo;
+
+        /// end point https://polygon-mumbai.g.alchemy.com/v2/bJkclFqoTl_ENvsREVppimmsh6o1uR4e
+        ///
+        //GetSymbol();
     }
 
 
