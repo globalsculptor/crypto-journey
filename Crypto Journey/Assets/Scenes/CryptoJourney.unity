@@ -2064,6 +2064,7 @@ MonoBehaviour:
   polygon: {fileID: 358336689}
   optimism: {fileID: 1360869055}
   ButtonText: {fileID: 1613549345}
+  BalanceText: {fileID: 817719790}
 --- !u!1 &1360869055
 GameObject:
   m_ObjectHideFlags: 0

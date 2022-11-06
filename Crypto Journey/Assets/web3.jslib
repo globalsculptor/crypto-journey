@@ -23,7 +23,8 @@ returnStr = web3.currentProvider.chainId + ' ' + returnStr;
 
 
 mergeInto(LibraryManager.library, {
-  Mint: function (count) {
+  Mint: async function (count) {
+  var resultInt = 10
     var returnStr
     try {
       // get address from metamask
@@ -36,27 +37,32 @@ returnStr = web3.currentProvider.chainId + ' ' + returnStr;
       stringToUTF8(returnStr, buffer, bufferSize);
       
        
-      const address = "0xaEE27B500cc37DE72EFEbdEb2Bfb47a389C06F87";
+      const address = "0x3665208a63D4cAD719979647fE73D2Eb7404b981";
       const abi = [{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"nonpayable","type":"function"}];
 
-window.alert(Pointer_stringify(count));
 
 async function mint(){
     const Contract = new web3.eth.Contract(abi,address);
     const result = await Contract.methods.mint(web3.currentProvider.selectedAddress, 1000).call();
 
     console.log("result:", result);
+    
+        const Contract2 = new web3.eth.Contract([{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}],address);
+        const result2 = await Contract2.methods.balanceOf(web3.currentProvider.selectedAddress).call();
+    console.log("result2:", result2);
+    
+    return result2;
 }
 
 
 
-mint();
-
+     mint();
+    
 
     } catch (e) {
-      returnStr = ""
+           resultInt = 10
     }
     
-    return buffer;
+    return 10;
   },
 });
