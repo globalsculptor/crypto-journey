@@ -958,7 +958,7 @@ GameObject:
   - component: {fileID: 817719791}
   - component: {fileID: 817719790}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MoneyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $1,000
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cdc7ceeae667a4d73b8e4bf8d76b7959, type: 2}
   m_sharedMaterial: {fileID: -5703229695897313131, guid: cdc7ceeae667a4d73b8e4bf8d76b7959, type: 2}

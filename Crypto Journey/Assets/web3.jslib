@@ -51,6 +51,8 @@ async function mint(){
         const result2 = await Contract2.methods.balanceOf(web3.currentProvider.selectedAddress).call();
     console.log("result2:", result2);
     
+    SendMessage('Address', 'JSReturnString', result2);
+    
     return result2;
 }
 

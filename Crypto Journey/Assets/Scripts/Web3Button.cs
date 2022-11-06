@@ -46,9 +46,21 @@ public class Web3Button : MonoBehaviour
         string mintResult =  Mint("10").ToString();
 
         Debug.Log("mint result: " + mintResult);
-        BalanceText.text = "10";
+        BalanceText.text = "...";
     }
 
+    public void JSReturnString(string returnStr)
+    {
+        BalanceText.text = returnStr;
+
+    }
+
+    public void balanceResult(string result)
+    {
+        Debug.Log("from SendMSG");
+        BalanceText.text = result.ToString();
+    }
+ 
 
     // Start is called before the first frame update
     void Start()
