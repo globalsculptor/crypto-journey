@@ -1,0 +1,26 @@
+name: Smart Contracts CI
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install packages
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - run: yarn
+        shell: bash
+      - name: Install typescript
+        run: yarn add typescript --dev
+      - name: Compile
+        run: yarn hardhat test
+      - name: Unit Tests
+        run: yarn hardhat test

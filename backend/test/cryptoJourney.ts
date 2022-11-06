@@ -1,5 +1,4 @@
-import { time, loadFixture } from "@nomicfoundation/hardhat-network-helpers";
-import { anyValue } from "@nomicfoundation/hardhat-chai-matchers/withArgs";
+import { loadFixture } from "@nomicfoundation/hardhat-network-helpers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { BigNumber } from "ethers";
@@ -47,72 +46,163 @@ describe("Crypto Journey", function () {
     });
   });
 
-  // TODO() Test bets.
-  // TODO() Test token transfers.
+  describe("Bets", () => {
+    describe("Put", () => {
+      it("Should revert bet creation because it does not have enough funds to create bet", async () => {
+        const { contract, otherAccount } = await loadFixture(deploy);
 
-  // describe("Withdrawals", function () {
-  //   describe("Validations", function () {
-  //     it("Should revert with the right error if called too soon", async function () {
-  //       const { lock } = await loadFixture(deploy);
+        // Put bet with account with no balance.
+        const result = contract
+          .connect(otherAccount)
+          .putBet("1000000", "10", "0");
 
-  //       await expect(contract.withdraw()).to.be.revertedWith(
-  //         "You can't withdraw yet"
-  //       );
-  //     });
+        await expect(result).to.be.revertedWith(
+          "Address does not have enough funds to place bet."
+        );
+      });
+      it("Should revert bet creation because user already has a bet in place.", async () => {
+        const { contract, otherAccount } = await loadFixture(deploy);
 
-  //     it("Should revert with the right error if called from another account", async function () {
-  //       const { contract, unlockTime, otherAccount } = await loadFixture(
-  //         deploy
-  //       );
+        // Mint coins to other account address.
+        await contract.mint(otherAccount.address, 10);
 
-  //       // We can increase the time in Hardhat Network
-  //       await time.increaseTo(unlockTime);
+        // Put Bet with other account.
+        await contract.connect(otherAccount).putBet("10", "1", "1");
 
-  //       // We use contract.connect() to send a transaction from another account
-  //       await expect(contract.connect(otherAccount).withdraw()).to.be.revertedWith(
-  //         "You aren't the owner"
-  //       );
-  //     });
+        // Check the bet is in contract.
+        expect(await contract.hasBet(otherAccount.address)).to.be.true;
 
-  //     it("Shouldn't fail if the unlockTime has arrived and the owner calls it", async function () {
-  //       const { contract, unlockTime } = await loadFixture(
-  //         deploy
-  //       );
+        // Put another Bet with other account.
+        const result = contract.connect(otherAccount).putBet("10", "1", "0");
 
-  //       // Transactions are sent using the first signer by default
-  //       await time.increaseTo(unlockTime);
+        // expect to fail be cause address already has bet in place.
+        await expect(result).to.be.revertedWith(
+          "Address already has a bet in place."
+        );
+      });
+      it("should place a bet & record that it has a bet in place", async () => {
+        const { contract, otherAccount } = await loadFixture(deploy);
 
-  //       await expect(contract.withdraw()).not.to.be.reverted;
-  //     });
-  //   });
+        // Mint coins to other account address.
+        await contract.mint(otherAccount.address, 10);
 
-  //   describe("Events", function () {
-  //     it("Should emit an event on withdrawals", async function () {
-  //       const { contract, unlockTime, lockedAmount } = await loadFixture(
-  //         deploy
-  //       );
+        // Put Bet with other account.
+        await contract.connect(otherAccount).putBet("10", "1", "1");
 
-  //       await time.increaseTo(unlockTime);
+        // Check the bet is in contract.
+        expect(await contract.hasBet(otherAccount.address)).to.be.true;
 
-  //       await expect(contract.withdraw())
-  //         .to.emit(contract, "Withdrawal")
-  //         .withArgs(lockedAmount, anyValue); // We accept any value as `when` arg
-  //     });
-  //   });
+        const placedBet = await contract.getBet(otherAccount.address);
 
-  //   describe("Transfers", function () {
-  //     it("Should transfer the funds to the owner", async function () {
-  //       const { contract, unlockTime, lockedAmount, owner } = await loadFixture(
-  //         deploy
-  //       );
+        expect(placedBet[0]).equals("10");
+        expect(placedBet[1]).equals("1");
+        expect(placedBet[2]).equals(1);
+      });
+    });
 
-  //       await time.increaseTo(unlockTime);
+    describe("Claim", () => {
+      it("Should revert bet claim because it does not have a bet in place", async () => {
+        const { contract, otherAccount } = await loadFixture(deploy);
 
-  //       await expect(contract.withdraw()).to.changeEtherBalances(
-  //         [owner, lock],
-  //         [lockedAmount, -lockedAmount]
-  //       );
-  //     });
-  //   });
-  // });
+        // Put bet with account with no balance.
+        const result = contract.connect(otherAccount).claimBet("1000001");
+
+        await expect(result).to.be.revertedWith(
+          "Address does not have a bet in place."
+        );
+      });
+      describe("Balance transfer logic", () => {
+        it("should be successful - bet going Up actual going up", async () => {
+          const { contract, otherAccount } = await loadFixture(deploy);
+  
+          // Mint coins to other account address.
+          await contract.mint(otherAccount.address, 10);
+  
+          // Put Bet with other account.
+          await contract.connect(otherAccount).putBet("20", "1", "1");
+  
+          // Claim Bet prize successfully.
+          await contract.connect(otherAccount).claimBet("21");
+  
+          // check other account balance.
+          const otherAccountBalance = await contract.balanceOf(
+            otherAccount.address
+          );
+  
+          expect(otherAccountBalance).to.be.equal(11);
+        });
+        it("should be un-successful - bet going up actual going down", async () => {
+          const { contract, otherAccount } = await loadFixture(deploy);
+  
+          // Mint coins to other account address.
+          await contract.mint(otherAccount.address, 10);
+  
+          // Put Bet with other account.
+          await contract.connect(otherAccount).putBet("20", "1", "1");
+  
+          // Claim Bet prize successfully.
+          await contract.connect(otherAccount).claimBet("18");
+  
+          // check other account balance.
+          const otherAccountBalance = await contract.balanceOf(
+            otherAccount.address
+          );
+  
+          expect(otherAccountBalance).to.be.equal(9);
+        });
+        it("should be successful - bet going down actual going down", async () => {
+          const { contract, otherAccount } = await loadFixture(deploy);
+  
+          // Mint coins to other account address.
+          await contract.mint(otherAccount.address, 10);
+  
+          // Put Bet with other account.
+          await contract.connect(otherAccount).putBet("20", "1", "0");
+  
+          // Claim Bet prize successfully.
+          await contract.connect(otherAccount).claimBet("18");
+  
+          // check other account balance.
+          const otherAccountBalance = await contract.balanceOf(
+            otherAccount.address
+          );
+  
+          expect(otherAccountBalance).to.be.equal(11);
+        });
+        it("should be un-successful - bet going down actual going up", async () => {
+          const { contract, otherAccount } = await loadFixture(deploy);
+  
+          // Mint coins to other account address.
+          await contract.mint(otherAccount.address, 10);
+  
+          // Put Bet with other account.
+          await contract.connect(otherAccount).putBet("20", "1", "0");
+  
+          // Claim Bet prize successfully.
+          await contract.connect(otherAccount).claimBet("21");
+  
+          // check other account balance.
+          const otherAccountBalance = await contract.balanceOf(
+            otherAccount.address
+          );
+  
+          expect(otherAccountBalance).to.be.equal(9);
+        });
+      })
+      it("should emit an Outcome event with the correct values", async () => {
+        const { contract, otherAccount } = await loadFixture(deploy);
+
+        // Mint coins to other account address.
+        await contract.mint(otherAccount.address, 10);
+
+        // Put Bet with other account.
+        await contract.connect(otherAccount).putBet("10", "1", "1");
+
+        // Claim Bet prize successfully.
+        await expect(contract.connect(otherAccount).claimBet("11"))
+          .to.emit(contract, "Outcome")
+          .withArgs(otherAccount.address, 1, "10", "11", "1");
+      })
+    });
+  });
 });
