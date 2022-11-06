@@ -7,6 +7,10 @@ using TMPro;
 
 public class Web3Button : MonoBehaviour
 {
+    public GameObject polygon;
+    public GameObject optimism;
+
+
     // text in the button
     public TextMeshProUGUI ButtonText;
     // use WalletAddress function from web3.jslib
@@ -14,7 +18,28 @@ public class Web3Button : MonoBehaviour
 
     public void OnClick()
     {
-        ButtonText.text = WalletAddress();
+        polygon.SetActive(false);
+        optimism.SetActive(false);
+
+        string walletInfo = WalletAddress();
+        if (walletInfo.StartsWith("0x13881"))
+        {
+            polygon.SetActive(true);
+        }
+
+        if (walletInfo.StartsWith("0x1a4"))
+        {
+            optimism.SetActive(true);
+        }
+
+        string[] strings = walletInfo.Split(' ');
+
+        if (strings.Length == 2)
+        {
+            ButtonText.text = strings[1].Substring(0, 5) + "..." + strings[1].Substring(strings[1].Length - 2, 2);
+        }
+
+        //ButtonText.text = walletInfo;
     }
 
 
