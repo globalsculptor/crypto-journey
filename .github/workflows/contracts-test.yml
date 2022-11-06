@@ -4,11 +4,19 @@ on:
   push:
   pull_request:
 
+env:
+  WALLET_ADDRESS: ${{ secrets.WALLET_ADDRESS }}
+  WALLET_PRIVATE_KEY: ${{ secrets.WALLET_PRIVATE_KEY }}
+  ETHERSCAN_API_KEY: ${{ secrets.ETHERSCAN_API_KEY }}
+  OPTIMISM_API_URL: ${{ secrets.OPTIMISM_API_URL }}
+  POLYGON_API_URL: ${{ secrets.POLYGON_API_URL }}
+
 jobs:
   tests:
     runs-on: ubuntu-latest
     defaults:
       run:
+        shell: bash
         working-directory: ./backend
     steps:
       - uses: actions/checkout@v3

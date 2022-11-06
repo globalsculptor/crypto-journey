@@ -1,4 +1,4 @@
 # crypto-journey
 A crypto market simulation game.
 
-[![Smart Contracts CI](https://github.com/globalsculptor/crypto-journey/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/globalsculptor/crypto-journey/actions/workflows/main.yml)
+[![Smart Contracts CI](https://github.com/globalsculptor/crypto-journey/actions/workflows/contracts-test.yml/badge.svg)](https://github.com/globalsculptor/crypto-journey/actions/workflows/contracts-test.yml)

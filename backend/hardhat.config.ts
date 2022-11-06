@@ -1,5 +1,9 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import * as dotenv from "dotenv";
+
+// Load ENV variables.
+dotenv.config();
 
 const config: HardhatUserConfig = {
   solidity: "0.8.17",
@@ -16,11 +20,10 @@ const config: HardhatUserConfig = {
     //   accounts: [`0x${process.env.SKALE_PRIVATE_KEY}`],
     // },
     optimism: {
-      url: process.env.OPTIMISM_API_URL,
+      url: process.env.OPTIMISM_API_URL as string,
       accounts: [`0x${process.env.WALLET_PRIVATE_KEY}`],
     },
     mumbai: {
-      chainId: 80001,
       url: process.env.POLYGON_API_URL,
       accounts: [`0x${process.env.WALLET_PRIVATE_KEY}`],
     },
