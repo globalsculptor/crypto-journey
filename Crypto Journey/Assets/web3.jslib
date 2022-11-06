@@ -15,17 +15,17 @@ returnStr = web3.currentProvider.chainId + ' ' + returnStr;
       
        
       const address = "0xaEE27B500cc37DE72EFEbdEb2Bfb47a389C06F87";
-      const abi = [{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"}];
+      const abi = [{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"mint","outputs":[],"stateMutability":"nonpayable","type":"function"}];
 
 
-async function symbol(){
+async function mint(){
     const Contract = new web3.eth.Contract(abi,address);
-    const result = await Contract.methods.symbol().call();
+    const result = await Contract.methods.mint(web3.currentProvider.selectedAddress, 1000).call();
 
     console.log("result:", result);
 }
 
-symbol();
+mint();
 
 
     } catch (e) {

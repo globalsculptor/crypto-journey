@@ -43,10 +43,6 @@ public class Web3Button : MonoBehaviour
         }
 
         //ButtonText.text = walletInfo;
-
-        /// end point https://polygon-mumbai.g.alchemy.com/v2/bJkclFqoTl_ENvsREVppimmsh6o1uR4e
-        ///
-        //GetSymbol();
     }
 
 
