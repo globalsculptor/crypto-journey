@@ -64,3 +64,7 @@ Crypto Journey/Temp/*
 Crypto Journey/ProjectSettings/*
 Crypto Journey/.DS_Store
 .DS_Store
+Crypto Journey/obj/Debug/*
+Crypto Journey/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache
+Crypto Journey/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache
+Crypto Journey/Packages/packages-lock.json
