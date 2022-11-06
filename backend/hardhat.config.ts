@@ -5,6 +5,8 @@ import * as dotenv from "dotenv";
 // Load ENV variables.
 dotenv.config();
 
+console.log(process.env)
+
 const config: HardhatUserConfig = {
   solidity: "0.8.17",
 
